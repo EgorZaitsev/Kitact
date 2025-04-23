@@ -2,15 +2,20 @@ import {Kitact} from "./main"
 import "./style.css"
 /** @jsx Kitact.createElement */
 
-const Title = <h1>Hello Kitact</h1>
+const container = document.getElementById("root")
 
-const App= <div >
-	<div className="title">{Title}</div>
-</div>
+const updateValue = e => {
+	rerender(e.target.value)
+}
 
+const rerender = value => {
+	const element = (
+		<div>
+			<input onInput={updateValue} value={value} />
+			<h2>Hello {value}</h2>
+		</div>
+	)
+	Kitact.render(element, container)
+}
 
-const root = document.getElementById("root")
-
-Kitact.render(App, root)
-
-console.log(App)
+rerender("World")
